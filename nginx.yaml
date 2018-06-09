@@ -10,6 +10,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
+    # the port that this service should serve on
   - port: 80
   selector:
     app: nginx
@@ -19,8 +20,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: nginx
+  labels:
+      cloudcontrol.enabled: "true"
+      cloudcontrol.index: "0"
+      LAUNCHPAD_ENABLE: "true"
+      LAUNCHPAD_COLOR: LIGHT_GREEN
+      LAUNCHPAD_ROW: "0"
 spec:
-  replicas: 2
+  # modify it according to your case
+  replicas: 1
   template:
     metadata:
       labels:
